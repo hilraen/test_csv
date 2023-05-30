@@ -33,18 +33,13 @@ export default function solution(content){
   const survivedPercent = (survived / data.length) * 100
   console.log(`Процент выживших: ${Math.round(survivedPercent*100)/100} %`);
 
-  const nameStartsWithA = data.reduce((acc, passenger) => {
-    if (passenger[3].startsWith('A', 1)) {
-      acc.push(' ' + passenger[3]);
+  const noQuotes = data.map((name) => name[3].replace(/"/g, ''));
+  const nameStartingWA = noQuotes.reduce((acc, user) => {
+    if (user.startsWith('A')) {
+      acc.push(' ' + user);
     }
     return acc;
   }, []);
-
-  const namesWithoutQuotes = nameStartsWithA.map((name) =>
-    name.replace(/"/g, '')
-  );
-
-  console.log(`Имена пассажиров, начинающиеся на A:${namesWithoutQuotes}.`);
-
+  console.log(`Имена пассажиров, начинающиеся на A:${nameStartingWA}.`);
   // END
 }
